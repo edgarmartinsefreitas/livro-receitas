@@ -1,0 +1,23 @@
+name: ChatGPT Encrypted Relay Test
+on:
+  push:
+    branches: [chatgpt-temp-transfer]
+permissions:
+  contents: read
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar blob criptografado
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --max-time 60 'https://temp.sh/OhRPk/sample.bin.enc' -o sample.bin.enc
+          test "$(sha256sum sample.bin.enc | cut -d' ' -f1)" = '522ac2b0ab0d93171033f9effd367e8a72dd835b9d95e56a971b9c1fada60b4b'
+      - name: Disponibilizar artefato criptografado
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-encrypted-relay
+          path: sample.bin.enc
+          retention-days: 1
+          if-no-files-found: error
