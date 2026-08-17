@@ -12,8 +12,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -L --fail --retry 3 --max-time 60 'https://temp.sh/OhRPk/sample.bin.enc' -o sample.bin.enc
-          test "$(sha256sum sample.bin.enc | cut -d' ' -f1)" = '522ac2b0ab0d93171033f9effd367e8a72dd835b9d95e56a971b9c1fada60b4b'
+          curl -L --fail --retry 3 --max-time 60 'https://litter.catbox.moe/u6cfx9.enc' -o sample.bin.enc
+          test "$(sha256sum sample.bin.enc | cut -d' ' -f1)" = '4a882f2135f0792f4c40ee49fdaf2b88fb2ab4b6a31f3c46febc2a1f96bb2d70'
       - name: Disponibilizar artefato criptografado
         uses: actions/upload-artifact@v4
         with:
